@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqckxv75yopb"]
+[gd_scene load_steps=11 format=3 uid="uid://dqckxv75yopb"]
 
 [ext_resource type="Script" uid="uid://bpjl52y6wye50" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://claerwmgvp2ji" path="res://mano_izquierda.gd" id="2_0xm2m"]
@@ -19,6 +19,10 @@ tonemap_mode = 2
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -54,3 +58,14 @@ script = ExtResource("3_h2yge")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_derecha"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.5, 1, -0.5)
 mesh = SubResource("BoxMesh_h2yge")
+
+[node name="Suelo" type="StaticBody3D" parent="."]
+
+[node name="Plano" type="MeshInstance3D" parent="Suelo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03821248, -0.0874424, 0.08311033)
+custom_aabb = AABB(100, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_h2yge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Suelo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0.1, 100)
+shape = SubResource("BoxShape3D_h2yge")
