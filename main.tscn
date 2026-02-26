@@ -26,6 +26,10 @@ script = ExtResource("1_ig7tw")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h2yge")
 
+[node name="Suelo" type="StaticBody3D" parent="WorldEnvironment"]
+
+[node name="Plano" type="MeshInstance3D" parent="WorldEnvironment/Suelo"]
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
@@ -36,11 +40,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Mano_izquierda" type="XRController3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 script = ExtResource("2_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_izquierda"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.5, 1, -0.5)
 mesh = SubResource("BoxMesh_0xm2m")
 
 [node name="Mano_derecha" type="XRController3D" parent="XROrigin3D"]
@@ -48,4 +52,5 @@ tracker = &"right_hand"
 script = ExtResource("3_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_derecha"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.5, 1, -0.5)
 mesh = SubResource("BoxMesh_h2yge")

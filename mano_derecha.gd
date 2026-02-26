@@ -1,9 +1,11 @@
-# En Mano_izquierda y Mano_derecha
 extends XRController3D
 
-@export var cube_scene: PackedScene
 
-func spawn_cube():
-	var cube = cube_scene.instantiate()
-	get_tree().current_scene.add_child(cube)
-	cube.global_transform = global_transform  # misma posición y rotación que la mano
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
