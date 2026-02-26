@@ -1,8 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqckxv75yopb"]
+[gd_scene load_steps=7 format=3 uid="uid://dqckxv75yopb"]
 
 [ext_resource type="Script" uid="uid://bpjl52y6wye50" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://c704clpqjnpep" path="res://mano_izquierda.gd" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://xe0u174q5vas" path="res://mano_derecha.gd" id="3_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -38,7 +36,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="Mano_izquierda" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
-script = ExtResource("2_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_izquierda"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -46,7 +43,6 @@ mesh = SubResource("BoxMesh_0xm2m")
 
 [node name="Mano_derecha" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
-script = ExtResource("3_1bvp3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_derecha"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.5, 1, -0.5)
