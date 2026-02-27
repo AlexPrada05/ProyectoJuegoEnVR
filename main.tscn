@@ -1,8 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqckxv75yopb"]
+[gd_scene load_steps=25 format=3 uid="uid://dqckxv75yopb"]
 
 [ext_resource type="Script" uid="uid://bpjl52y6wye50" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://claerwmgvp2ji" path="res://mano_izquierda.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bntb5gj13awac" path="res://mano_derecha.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://ddprscrpsofah" path="res://demo/assets/textures/ground037_alb_ht.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://c1ots7w6i0i1q" path="res://demo/assets/textures/ground037_nrm_rgh.png" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://c88j3oj0lf6om" path="res://demo/assets/textures/rock023_alb_ht.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://c307hdmos4gtm" path="res://demo/assets/textures/rock023_nrm_rgh.png" id="7_5vw27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -28,9 +32,80 @@ size = Vector3(20, 0.1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
+[sub_resource type="Gradient" id="Gradient_h2yge"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
+noise = SubResource("FastNoiseLite_1bvp3")
+color_ramp = SubResource("Gradient_h2yge")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_7mycd"]
+_shader_parameters = {
+&"bias_distance": 512.0,
+&"blend_sharpness": 0.5,
+&"depth_blur": 0.0,
+&"enable_macro_variation": true,
+&"enable_projection": true,
+&"flat_terrain_normals": false,
+&"macro_variation1": Color(1, 1, 1, 1),
+&"macro_variation2": Color(1, 1, 1, 1),
+&"macro_variation_slope": 0.333,
+&"mipmap_bias": 1.0,
+&"noise1_angle": 0.0,
+&"noise1_offset": Vector2(0.5, 0.5),
+&"noise1_scale": 0.04,
+&"noise2_scale": 0.076,
+&"noise_texture": SubResource("NoiseTexture2D_lquwl"),
+&"projection_threshold": 0.8
+}
+world_background = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_5vw27"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_272bh")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_272bh"]
+name = "ground037_alb_ht"
+albedo_texture = ExtResource("4_1bvp3")
+normal_texture = ExtResource("5_lquwl")
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_kek77"]
+name = "rock023_alb_ht"
+id = 1
+albedo_texture = ExtResource("6_272bh")
+normal_texture = ExtResource("7_5vw27")
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_kek77"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_5vw27")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_272bh"), SubResource("Terrain3DTextureAsset_kek77")])
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -39,9 +114,11 @@ script = ExtResource("1_ig7tw")
 environment = SubResource("Environment_h2yge")
 
 [node name="Suelo" type="StaticBody3D" parent="WorldEnvironment"]
+visible = false
 
 [node name="Plano" type="MeshInstance3D" parent="WorldEnvironment/Suelo"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0.1, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_h2yge")
 mesh = SubResource("PlaneMesh_1bvp3")
 
@@ -74,13 +151,9 @@ script = ExtResource("3_h2yge")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.5, 1, -0.5)
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="Suelo" type="StaticBody3D" parent="."]
-
-[node name="Plano" type="MeshInstance3D" parent="Suelo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03821248, -0.0874424, 0.08311033)
-custom_aabb = AABB(100, 0, 100, 0, 0, 0)
-mesh = SubResource("PlaneMesh_h2yge")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Suelo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0.1, 100)
-shape = SubResource("BoxShape3D_h2yge")
+[node name="Terrain3D" type="Terrain3D" parent="."]
+data_directory = "res://Terrain"
+material = SubResource("Terrain3DMaterial_7mycd")
+assets = SubResource("Terrain3DAssets_kek77")
+top_level = true
+metadata/_edit_lock_ = true
