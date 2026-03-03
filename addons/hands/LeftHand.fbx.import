@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cgdhpnsnu1j0y"
-path="res://.godot/imported/LeftHand.fbx-1a1bce4f7586bf3fcdf30a182da92899.scn"
+valid=false
 
 [deps]
 
 source_file="res://addons/hands/LeftHand.fbx"
-dest_files=["res://.godot/imported/LeftHand.fbx-1a1bce4f7586bf3fcdf30a182da92899.scn"]
 
 [params]
 
