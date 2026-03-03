@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dqckxv75yopb"]
+[gd_scene load_steps=28 format=3 uid="uid://dqckxv75yopb"]
 
 [ext_resource type="Script" uid="uid://bpjl52y6wye50" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://claerwmgvp2ji" path="res://mano_izquierda.gd" id="2_0xm2m"]
@@ -112,6 +112,10 @@ metallic_texture = ExtResource("6_272bh")
 
 [sub_resource type="BoxMesh" id="BoxMesh_kek77"]
 material = SubResource("StandardMaterial3D_5vw27")
+size = Vector3(1, 0.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
+size = Vector3(1, 0.8, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -165,5 +169,10 @@ top_level = true
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011826754, 0.5267645, -1.616528)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011826754, 0.4041239, -1.616528)
 mesh = SubResource("BoxMesh_kek77")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="Mesa" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_kek77")
