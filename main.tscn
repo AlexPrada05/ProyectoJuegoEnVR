@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bpjl52y6wye50" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://claerwmgvp2ji" path="res://mano_izquierda.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bntb5gj13awac" path="res://mano_derecha.gd" id="3_h2yge"]
-[ext_resource type="ArrayMesh" uid="uid://bpjvlhflforb" path="res://addons/hands/Root Scene_hands_Lhand.res" id="3_kek77"]
+[ext_resource type="PackedScene" uid="uid://cgdhpnsnu1j0y" path="res://addons/hands/LeftHand.fbx" id="3_kek77"]
 [ext_resource type="Texture2D" uid="uid://ddprscrpsofah" path="res://demo/assets/textures/ground037_alb_ht.png" id="4_1bvp3"]
-[ext_resource type="ArrayMesh" uid="uid://rui7ighyx511" path="res://addons/hands/Root Scene_hands_Rhand.res" id="5_4c57u"]
+[ext_resource type="PackedScene" uid="uid://ol2tde4ce8ah" path="res://addons/hands/RightHand.fbx" id="5_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c1ots7w6i0i1q" path="res://demo/assets/textures/ground037_nrm_rgh.png" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://c88j3oj0lf6om" path="res://demo/assets/textures/rock023_alb_ht.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://c307hdmos4gtm" path="res://demo/assets/textures/rock023_nrm_rgh.png" id="7_5vw27"]
@@ -134,20 +134,20 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Mano_izquierda" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 tracker = &"left_hand"
 script = ExtResource("2_0xm2m")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_izquierda"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49141175, 1.0010014, -0.49040163)
-mesh = ExtResource("3_kek77")
+[node name="Root Scene" parent="XROrigin3D/Mano_izquierda" instance=ExtResource("3_kek77")]
+transform = Transform3D(-0.9848077, 0, 0.17364822, 0, 1, 0, -0.17364822, 0, -0.9848077, -0.1, 0.14, -0.5)
 
 [node name="Mano_derecha" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 tracker = &"right_hand"
 script = ExtResource("3_h2yge")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Mano_derecha"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
-mesh = ExtResource("5_4c57u")
+[node name="Root Scene" parent="XROrigin3D/Mano_derecha" instance=ExtResource("5_4c57u")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.1, 0.14, -0.5)
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
 data_directory = "res://Terrain"
